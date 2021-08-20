@@ -17,10 +17,9 @@ public class UserDaoJDBCImpl implements UserDao {
     }
 
     public void createUsersTable() {
-        try (Connection connection = Util.getUtilConnection();
-             Statement statement = connection.createStatement()) {
-
-            statement.executeUpdate("CREATE TABLE IF NOT EXISTS users "+
+        try (Connection connection = Util.getUtilConnection()) {
+            Statement statement = connection.createStatement();
+            statement.executeUpdate("CREATE TABLE IF NOT EXISTS users " +
                     "(id BIGINT(19) NOT NULL AUTO_INCREMENT, " +
                     "name VARCHAR(45) NOT NULL," +
                     "lastname VARCHAR(45) NOT NULL, " +
@@ -32,8 +31,8 @@ public class UserDaoJDBCImpl implements UserDao {
     }
 
     public void dropUsersTable() {
-        try (Connection connection = Util.getUtilConnection();
-             Statement statement = connection.createStatement()) {
+        try (Connection connection = Util.getUtilConnection()) {
+            Statement statement = connection.createStatement();
             statement.executeUpdate("DROP TABLE IF EXISTS users;");
         } catch (SQLException throwables) {
             throwables.getStackTrace();
@@ -41,10 +40,10 @@ public class UserDaoJDBCImpl implements UserDao {
     }
 
     public void saveUser(String name, String lastName, byte age) {
-        try (Connection connection = Util.getUtilConnection();
+        try (Connection connection = Util.getUtilConnection()) {
 
-             PreparedStatement preparedStatement = connection.prepareStatement(
-                     "INSERT INTO users (name, lastname, age) VALUES  (?, ?, ?);")) {
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                    "INSERT INTO users (name, lastname, age) VALUES  (?, ?, ?);");
 
             preparedStatement.setString(1, name);
             preparedStatement.setString(2, lastName);

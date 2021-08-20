@@ -64,7 +64,7 @@ public class Main {
     public static void main(String[] args) {
         // реализуйте алгоритм здесь
         final UserService userService = new UserServiceImpl();
-
+//создание БД
         userService.createUsersTable();
         /*===========================createUsersTable=======================================================*/
         /* Добавление 4 User(ов) в таблицу с данными на свой выбор. */
@@ -78,7 +78,7 @@ public class Main {
 
                 System.out.println("Input age: ");
                 byte age = scanner.nextByte();
-
+//создание юзеров
                 userService.saveUser(name, lastname, age);
                 /*===============================saveUser=======================================*/
                 System.out.printf("User с именем – %s добавлен в базу данных users\n", name);
