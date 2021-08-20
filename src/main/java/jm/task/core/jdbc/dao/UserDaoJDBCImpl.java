@@ -17,9 +17,8 @@ public class UserDaoJDBCImpl implements UserDao {
     }
 
     public void createUsersTable() {
-        try (Connection connect = DriverManager.getConnection(Util
-                .getURLFIXED(), Util.getLOGIN(), Util.getPASSWORD());
-             Statement statement = connect.createStatement()) {
+        try (Connection connect = new Util().getUtilConnection()) {
+            Statement statement = connect.createStatement();
             statement.executeUpdate("CREATE TABLE IF NOT EXISTS users " +
                     "(id BIGINT(19) NOT NULL AUTO_INCREMENT, " +
                     "name VARCHAR(45) NOT NULL," +
@@ -31,9 +30,9 @@ public class UserDaoJDBCImpl implements UserDao {
         }
     }
 
+
     public void dropUsersTable() {
-        try (Connection connection = DriverManager.getConnection(Util
-                .getURLFIXED(), Util.getLOGIN(), Util.getPASSWORD())) {
+        try (Connection connection = new Util().getUtilConnection()) {
             Statement statement = connection.createStatement();
             statement.executeUpdate("DROP TABLE IF EXISTS users;");
         } catch (SQLException throwables) {
@@ -42,8 +41,7 @@ public class UserDaoJDBCImpl implements UserDao {
     }
 
     public void saveUser(String name, String lastName, byte age) {
-        try (Connection connection = DriverManager.getConnection(Util
-                .getURLFIXED(), Util.getLOGIN(), Util.getPASSWORD())) {
+        try (Connection connection = new Util().getUtilConnection()) {
 
             PreparedStatement preparedStatement = connection.prepareStatement(
                     "INSERT INTO users (name, lastname, age) VALUES  (?, ?, ?);");
@@ -61,8 +59,7 @@ public class UserDaoJDBCImpl implements UserDao {
 
 
     public void removeUserById(long id) {
-        try (Connection connection = DriverManager.getConnection(Util
-                .getURLFIXED(), Util.getLOGIN(), Util.getPASSWORD());
+        try (Connection connection = new Util().getUtilConnection();
 
              PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM users WHERE id=?;")) {
             preparedStatement.setLong(1, id);
@@ -74,8 +71,7 @@ public class UserDaoJDBCImpl implements UserDao {
 
     public List<User> getAllUsers() {
         List<User> arrayUsers = new ArrayList<>();
-        try (Connection connection = DriverManager.getConnection(Util
-                .getURLFIXED(), Util.getLOGIN(), Util.getPASSWORD());
+        try (Connection connection = new Util().getUtilConnection();
 
              PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM users;")) {
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -94,8 +90,7 @@ public class UserDaoJDBCImpl implements UserDao {
     }
 
     public void cleanUsersTable() {
-        try (Connection connection = DriverManager.getConnection(Util
-                .getURLFIXED(), Util.getLOGIN(), Util.getPASSWORD());
+        try (Connection connection = new Util().getUtilConnection();
 
              PreparedStatement preparedStatement = connection.prepareStatement("TRUNCATE users")) {
             preparedStatement.executeUpdate();
