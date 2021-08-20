@@ -1,5 +1,10 @@
 package jm.task.core.jdbc;
 
+import jm.task.core.jdbc.service.UserService;
+import jm.task.core.jdbc.service.UserServiceImpl;
+
+import java.util.Scanner;
+
 /*
  * Необходимо ознакомиться с заготовкой и доработать приложение, которое взаимодействует
  * с базой оперируя пользователем ( класс User ) и проверить свои методы заранее
@@ -21,9 +26,7 @@ package jm.task.core.jdbc;
  * у нас не WEB приложение)
  * <p>
  * Ознакомиться с паттерном можно здесь
- * <p>
- * <p>
- * <p>
+ *
  * Требования к классам приложения:
  * <p>
  * Классы dao/service должны реализовывать соответствующие интерфейсы
@@ -60,5 +63,37 @@ package jm.task.core.jdbc;
 public class Main {
     public static void main(String[] args) {
         // реализуйте алгоритм здесь
+        final UserService userService = new UserServiceImpl();
+
+        userService.createUsersTable();
+        /*===========================createUsersTable=======================================================*/
+        /* Добавление 4 User(ов) в таблицу с данными на свой выбор. */
+        try (Scanner scanner = new Scanner(System.in)) {
+            for (int i = 0; i < 4; i++) {
+                System.out.println("Input name: ");
+                String name = scanner.next();
+
+                System.out.println("Input lastname: ");
+                String lastname = scanner.next();
+
+                System.out.println("Input age: ");
+                byte age = scanner.nextByte();
+
+                userService.saveUser(name, lastname, age);
+                /*===============================saveUser=======================================*/
+                System.out.printf("User с именем – %s добавлен в базу данных users\n", name);
+            }
+
+        }
+        //получение всех юзеров
+        System.out.println(userService.getAllUsers());
+        /*========================getAllUsers=======================================*/
+        // очистка талицы
+        userService.cleanUsersTable();
+        /*================================================================*/
+
+        // удаление таблицы
+        userService.dropUsersTable();
+        /*===========================dropUsersTable=================================*/
     }
 }
