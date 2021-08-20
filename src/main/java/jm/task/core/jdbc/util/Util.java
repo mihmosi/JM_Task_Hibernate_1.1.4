@@ -12,8 +12,22 @@ public class Util {
     private static final String LOGIN = "root";
     private static final String PASSWORD = "root";
 
+    public static String getURLFIXED() {
+        return URLFIXED;
+    }
+
+    public static String getLOGIN() {
+        return LOGIN;
+    }
+
+    public static String getPASSWORD() {
+        return PASSWORD;
+    }
+
     private static Connection con;
-    public Util(){   }
+
+    public Util() {
+    }
     // реализуйте настройку соеденения с БД
 
     private static void loadMysqlDriver() {
@@ -24,19 +38,19 @@ public class Util {
         }
     }
 
-    public static Connection getUtilConnection() {
-
-        try {
-            loadMysqlDriver();
-            Connection conn = DriverManager.getConnection(URLFIXED, LOGIN, PASSWORD);
-            if (!conn.isClosed()) {
-                System.out.println("Correct connection to db! ");
-            }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-
-        return con;
-    }
+//    public  Connection getUtilConnection() {
+//
+//        try {
+//            loadMysqlDriver();
+//            Connection conn = DriverManager.getConnection(URLFIXED, LOGIN, PASSWORD);
+//            if (!conn.isClosed()) {
+//                System.out.println("Correct connection to db! ");
+//            }
+//        } catch (SQLException throwables) {
+//            throwables.printStackTrace();
+//        }
+//
+//        return con;
+//    }
 
 }

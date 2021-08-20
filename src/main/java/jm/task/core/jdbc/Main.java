@@ -83,10 +83,11 @@ public class Main {
                 /*===============================saveUser=======================================*/
                 System.out.printf("User с именем – %s добавлен в базу данных users\n", name);
             }
-
+            userService.getAllUsers();
         }
         //получение всех юзеров
         System.out.println(userService.getAllUsers());
+
         /*========================getAllUsers=======================================*/
         // очистка талицы
         userService.cleanUsersTable();
