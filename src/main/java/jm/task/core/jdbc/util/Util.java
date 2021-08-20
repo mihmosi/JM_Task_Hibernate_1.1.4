@@ -10,7 +10,7 @@ public class Util {
             "jdbc:mysql://127.0.0.1:3306/testbase?useUnicode=true&useSSL=true&useJDBCCompliantTimezoneShift=true" +
                     "&useLegacyDatetimeCode=false&serverTimezone=UTC";
     private static final String LOGIN = "root";
-    private static final String PASSWORD = "Lelechka3003";
+    private static final String PASSWORD = "root";
 
     private static Connection con;
     public Util(){   }
