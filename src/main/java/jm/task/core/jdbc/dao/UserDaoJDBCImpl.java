@@ -40,7 +40,7 @@ public class UserDaoJDBCImpl implements UserDao {
         }
     }
 
-    public void saveUser(String name, String lastName, byte age) {
+    public Object saveUser(String name, String lastName, byte age) {
         try (Connection connection = new Util().getUtilConnection()) {
 
             PreparedStatement preparedStatement = connection.prepareStatement(
@@ -55,6 +55,7 @@ public class UserDaoJDBCImpl implements UserDao {
         } catch (SQLException throwables) {
             throwables.getStackTrace();
         }
+        return null;
     }
 
 

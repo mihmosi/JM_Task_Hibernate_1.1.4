@@ -2,6 +2,9 @@ package jm.task.core.jdbc;
 
 import jm.task.core.jdbc.service.UserService;
 import jm.task.core.jdbc.service.UserServiceImpl;
+import jm.task.core.jdbc.util.Util;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
 import java.util.Scanner;
 
@@ -37,14 +40,49 @@ import java.util.Scanner;
  * toString в классе User)
  * Очистка таблицы User(ов)
  * Удаление таблицы
+  UserHibernateDaoImpl должен реализовывать интерефейс UserDao
+ В класс Util должна быть добавлена конфигурация для Hibernate
+  ( рядом с JDBC), без использования xml.
+ Service на этот раз использует реализацию dao через Hibernate
+ Методы создания и удаления таблицы пользователей в классе
+ UserHibernateDaoImpl должны быть реализованы с помощью SQL.
  */
 public class Main {
     public static void main(String[] args) {
-        // реализуйте алгоритм здесь
+//        SessionFactory sessionFactory = Util.getSessionFactory();
+//        Session session = sessionFactory.openSession();
+//        try {
+//            session.beginTransaction();
+//            // запросы к базе
+//
+//            System.out.println("Ok");
+//            session.getTransaction().commit();
+//        } catch (Exception e) {
+//            session.getTransaction().rollback();
+//            e.printStackTrace();
+//        } finally {
+//            session.close();
+//            sessionFactory.close();
+//        }
+
+//    }
+
+//        try  {
+//            // Check MySQL db version
+//            String sql = "select version()";
+//
+//            String result = (String) session.createNativeQuery(sql).getSingleResult();
+//            System.out.println("MySQL db Version is:::");
+//            System.out.println(result);
+//            session.close();
+//        } catch (HibernateException e) {
+//            e.printStackTrace();
+//        }
+//        // реализуйте алгоритм здесь
         final UserService userService = new UserServiceImpl();
-//создание БД
+////создание БД
         userService.createUsersTable();
-        /*===========================createUsersTable=======================================================*/
+//        /*===========================createUsersTable=======================================================*/
         /* Добавление 4 User(ов) в таблицу с данными на свой выбор. */
         try (Scanner scanner = new Scanner(System.in)) {
             for (int i = 0; i < 4; i++) {
@@ -56,6 +94,7 @@ public class Main {
 
                 System.out.println("Input age: ");
                 byte age = scanner.nextByte();
+
 //создание юзеров
                 userService.saveUser(name, lastname, age);
                 /*===============================saveUser=======================================*/
@@ -63,16 +102,16 @@ public class Main {
             }
             userService.getAllUsers();
         }
-        //получение всех юзеров
-        System.out.println(userService.getAllUsers());
-
-        /*========================getAllUsers=======================================*/
-        // очистка талицы
-        userService.cleanUsersTable();
-        /*================================================================*/
-
-        // удаление таблицы
-        userService.dropUsersTable();
-        /*===========================dropUsersTable=================================*/
+//        //получение всех юзеров
+//        System.out.println(userService.getAllUsers());
+//
+//        /*========================getAllUsers=======================================*/
+//        // очистка талицы
+//        userService.cleanUsersTable();
+//        /*================================================================*/
+//
+//        // удаление таблицы
+//        userService.dropUsersTable();
+//        /*===========================dropUsersTable=================================*/
     }
 }
