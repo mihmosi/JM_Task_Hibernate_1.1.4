@@ -6,14 +6,17 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserDaoHibernateImpl implements UserDao {
 
     public UserDaoHibernateImpl() {
     }
+
     private final SessionFactory sessionFactory = Util.getSessionFactory();
-//    Session session = sessionFactory.openSession();
+
+    //    Session session = sessionFactory.openSession();
     @Override
     public void createUsersTable() {
         Session session = sessionFactory.openSession();
@@ -39,17 +42,33 @@ public class UserDaoHibernateImpl implements UserDao {
 
     @Override
     public void dropUsersTable() {
-
-    }
-
-    @Override
-    public Object saveUser(String name, String lastName, byte age) {
         Session session = sessionFactory.openSession();
         try {
             session.beginTransaction();
             System.out.println("Ok");
             // запросы к базе
-            session.save(saveUser(name, lastName, age));
+//            session.createSQLQuery("DROP TABLE IF EXISTS users;");
+            session.createSQLQuery("DROP TABLE IF EXISTS users;")
+                    .executeUpdate();
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            session.getTransaction().rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+            sessionFactory.close();
+        }
+    }
+
+    @Override
+    public Object saveUser(String name, String lastName, byte age) {
+        Session session = sessionFactory.openSession();
+        User user = new User();
+        try {
+            session.beginTransaction();
+            System.out.println("Ok");
+            // запросы к базе
+            session.save(user);
             session.getTransaction().commit();
         } catch (Exception e) {
             session.getTransaction().rollback();
@@ -63,11 +82,42 @@ public class UserDaoHibernateImpl implements UserDao {
 
     @Override
     public void removeUserById(long id) {
-
+        Session session = sessionFactory.openSession();
+        User user = (User) session.get(User.class, id);
+        try {
+            session.beginTransaction();
+            System.out.println("Ok");
+            // запросы к базе
+            session.delete(user);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            session.getTransaction().rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+            sessionFactory.close();
+        }
     }
 
     @Override
     public List<User> getAllUsers() {
+//       List arrayList = null;
+//        Session session = sessionFactory.openSession();
+//        try {
+//            session.beginTransaction();
+//            System.out.println("Ok");
+//            // запросы к базе
+//            User users = (User)session.createCriteria(User.class).list();
+//            arrayList = session.createSQLQuery("SELECT * FROM users;").list();
+//            session.getTransaction().commit();
+//        } catch (Exception e) {
+//            session.getTransaction().rollback();
+//            e.printStackTrace();
+//        } finally {
+//            session.close();
+//            sessionFactory.close();
+//        }
+////        List<User> users = session.create
         return null;
     }
 

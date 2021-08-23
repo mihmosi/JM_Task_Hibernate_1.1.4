@@ -102,16 +102,16 @@ public class Main {
             }
             userService.getAllUsers();
         }
-//        //получение всех юзеров
-//        System.out.println(userService.getAllUsers());
-//
-//        /*========================getAllUsers=======================================*/
-//        // очистка талицы
-//        userService.cleanUsersTable();
-//        /*================================================================*/
-//
-//        // удаление таблицы
-//        userService.dropUsersTable();
-//        /*===========================dropUsersTable=================================*/
+        //получение всех юзеров
+        System.out.println(userService.getAllUsers());
+
+        /*========================getAllUsers=======================================*/
+        // очистка талицы
+        userService.cleanUsersTable();
+        /*================================================================*/
+
+        // удаление таблицы
+        userService.dropUsersTable();
+        /*===========================dropUsersTable=================================*/
     }
 }
