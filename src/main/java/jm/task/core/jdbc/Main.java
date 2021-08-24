@@ -79,10 +79,14 @@ public class Main {
 //            e.printStackTrace();
 //        }
 //        // реализуйте алгоритм здесь
+        // создаем объект  userService чтобы ем
         final UserService userService = new UserServiceImpl();
-////создание БД
+        /*===========================createUsersTable=======================*/
+        //создание БД
         userService.createUsersTable();
-//        /*===========================createUsersTable=======================================================*/
+       /*===========================createUsersTable=======================*/
+
+        /*===============================saveUser=========================*/
         /* Добавление 4 User(ов) в таблицу с данными на свой выбор. */
         try (Scanner scanner = new Scanner(System.in)) {
             for (int i = 0; i < 4; i++) {
@@ -95,23 +99,28 @@ public class Main {
                 System.out.println("Input age: ");
                 byte age = scanner.nextByte();
 
-//создание юзеров
+                //  вызываем метод создания юзеров и передаем аргументы в метод
+                // и так 4 раза
                 userService.saveUser(name, lastname, age);
-                /*===============================saveUser=======================================*/
                 System.out.printf("User с именем – %s добавлен в базу данных users\n", name);
             }
-            userService.getAllUsers();
         }
-        //получение всех юзеров
-        System.out.println(userService.getAllUsers());
+        /*===============================saveUser=========================*/
 
-        /*========================getAllUsers=======================================*/
+        /*========================getAllUsers==============================*/
+        //получение всех юзеров
+            userService.getAllUsers();
+        System.out.println(userService.getAllUsers());
+        /*========================getAllUsers==============================*/
+
+        /*=========================cleanUsersTable=========================*/
         // очистка талицы
         userService.cleanUsersTable();
-        /*================================================================*/
+        /*=========================cleanUsersTable=========================*/
 
+        /*===========================dropUsersTable========================*/
         // удаление таблицы
         userService.dropUsersTable();
-        /*===========================dropUsersTable=================================*/
-    }
-}
+        /*===========================dropUsersTable========================*/
+    }  //Закрываем МЕТОД MAIN
+}      //Закрываем КЛАСС MAIN
