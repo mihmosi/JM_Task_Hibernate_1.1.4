@@ -86,7 +86,7 @@ public class Main {
         userService.createUsersTable();
        /*===========================createUsersTable=======================*/
 
-        /*===============================saveUser=========================*/
+        /*=============================saveUser=========================*/
         /* Добавление 4 User(ов) в таблицу с данными на свой выбор. */
         try (Scanner scanner = new Scanner(System.in)) {
             for (int i = 0; i < 4; i++) {

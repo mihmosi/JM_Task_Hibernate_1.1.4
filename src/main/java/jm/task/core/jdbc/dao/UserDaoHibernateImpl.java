@@ -29,7 +29,7 @@ public class UserDaoHibernateImpl implements UserDao {
                     "PRIMARY KEY (id));")
                     .executeUpdate();
 
-            // потверждаем изменения
+            //  потверждаем изменения
 //            System.out.println("Session in transaction");
             session.getTransaction().commit();
         } catch (Exception e) {

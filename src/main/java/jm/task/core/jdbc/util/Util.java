@@ -11,7 +11,7 @@ import java.util.Properties;
 
 /* Класс Util должен содержать логику настройки соединения с базой данных */
 public class Util {
-    //  определяем константы
+    // определяем константы
     private static final String DB_DRIVER = "com.mysql.cj.jdbc.Driver";
     private static final String DB_DIALECT = "org.hibernate.dialect.MySQLDialect";
 
